@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Search</title>
+</head>
+<body>
+<div layout:fragment="content">
+        <div class="row">
+            <div class="col-md-8">
+                <th:block th:each="book : ${books}">
+                    <div id="mapping_book">
+                        <div class="img_book">
+                            <img th:src="@{|/book/${book.id}/image|}" height="300" width="250"/>
+                        </div>
+                        <div class="about_book clearfix">
+                            <h1 class="wrap_book_name" th:text="${book.name}"></h1>
+
+                            <h3 class="wrap_author" th:text="${book.author}"></h3>
+
+                            <h4 class="wrap_description" th:text="${book.description}"></h4>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+
+            <!-- Search form -->
+            <div class="col-md-4" id="search-form">
+                <th:block th:include="fragments/searchform :: searchform"/>
+            </div>
+        </div>
+</div>
+</body>
+</html>

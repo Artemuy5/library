@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>add book</title>
+    <link rel="stylesheet" th:href="@{/css/addBook.css}" type="text/css"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <form id="book_content" th:action="@{/book/add}" method="post" th:object="${book}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name" th:text="#{book.name.add.book.form}"></label>
+            <input maxlength="15" th:required="required_field" autocomplete="off" id="name" class="form-control"
+                   th:placeholder="#{book.name.add.book.form}" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label for="author" th:text="#{author.add.book.form}"></label>
+            <input maxlength="15" th:required="required_field" autocomplete="off" id="author" class="form-control"
+                   th:placeholder="#{author.add.book.form}" th:field="*{author}"/>
+        </div>
+        <div class="form-group">
+            <label for="description" th:text="#{book.description.add.book.form}"></label>
+            <input maxlength="30" th:required="required_field" autocomplete="off" id="description" class="form-control"
+                   th:placeholder="#{book.description.add.book.form}" th:field="*{description}"/>
+        </div>
+
+        <div class="inputs_img_file">
+            <div class="form-group">
+                <label for="file" th:text="#{file.add.book.form}"></label>
+                <input type="file" accept="application/pdf" id="file" name="file" th:field="*{file}"/>
+            </div>
+            <div class="form-group">
+                <label for="image" th:text="#{image.add.book.form}"></label>
+                <input type="file" accept="image/jpeg,image/png" id="image" th:field="*{image}"/>
+            </div>
+        </div>
+
+        <button type="submit" value="Upload" class="btn btn-default upload_files_button"
+                th:text="#{button.add.book.form}"></button>
+    </form>
+</div>
+</body>
+</html>

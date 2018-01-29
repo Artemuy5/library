@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+</head>
+<body>
+    <th:block th:fragment="searchform">
+        <form th:action="@{/search}" method="post" th:object="${filter}">
+            <div class="form-group">
+                <label for="name" th:text="#{book.name.add.book.form}"></label>
+                <input autocomplete="off" id="name" class="form-control" th:placeholder="#{book.name.add.book.form}"
+                       th:field="*{name}"/>
+            </div>
+            <div class="form-group">
+                <label for="author" th:text="#{author.add.book.form}"></label>
+                <input autocomplete="off" id="author" class="form-control" th:placeholder="#{author.add.book.form}"
+                       th:field="*{author}"/>
+            </div>
+            <div class="form-group">
+                <label for="description" th:text="#{book.description.add.book.form}"></label>
+                <input autocomplete="off" id="description" class="form-control"
+                       th:placeholder="#{book.description.add.book.form}"
+                       th:field="*{description}"/>
+            </div>
+            <div class="form-group">
+                <label for="startDate" th:text="#{search.form.start.date}"></label>
+                <input id="startDate" type="date" class="form-control" th:field="*{startDate}"/>
+            </div>
+            <div class="form-group">
+                <label for="endDate" th:text="#{search.form.end.date}"></label>
+                <input id="endDate" type="date" class="form-control" th:field="*{endDate}"/>
+            </div>
+            <div class="form-group">
+                <label for="sortBy" th:text="#{search.form.sort.by}"></label>
+                <select id="sortBy" class="form-control" th:field="*{sortBy}">
+                    <option value="name" th:text="#{search.form.name}"></option>
+                    <option value="date_added" th:text="#{search.form.date}"></option>
+                </select>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" th:field="*{onlyWithImages}"/>
+
+                    <div th:text="#{search.form.only.with.images}"></div>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" th:field="*{strict}"/>
+
+                    <div th:text="#{search.form.strict.filter}"></div>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default" th:text="#{search.button}"></button>
+        </form>
+    </th:block>
+</body>
+</html>

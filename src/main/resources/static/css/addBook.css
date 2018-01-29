@@ -1,0 +1,22 @@
+#book_content {
+    width: 100%;
+    max-width: 1000px;
+    padding: 35px 55px 35px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: white 0px 0px 20px 1px;
+    background: #2B3E50;
+}
+
+.inputs_img_file {
+    display: flex;
+}
+
+.upload_files_button {
+    position: absolute;
+    right: 55px;
+    top: 285px;
+}
+

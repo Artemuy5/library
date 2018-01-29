@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" type="text/css"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="login_board">
+        <form id="login_form" class="form-signin" method="post" th:action="@{/login}">
+            <h2 class="form-signin-heading caption" th:text="#{login.title}"></h2>
+
+            <label for="inputUsername" class="sr-only" th:text="#{login.form.username}"></label>
+
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                <input th:required="required_field" autocomplete="off" name="username" type="text" id="inputUsername" class="form-control"
+                       th:placeholder="#{login.form.username}"/>
+            </div>
+
+            <label for="inputPassword" class="sr-only" th:text="#{login.form.password}"></label>
+
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-unlock-alt pass_icon" aria-hidden="true"></i></div>
+                <input th:required="required_field" autocomplete="off" type="password" name="password" id="inputPassword" class="form-control"
+                       th:placeholder="#{login.form.password}"/>
+            </div>
+
+            <button id="login_button" type="submit" th:text="#{login.form.button}"></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

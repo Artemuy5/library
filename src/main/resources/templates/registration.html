@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" type="text/css"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="login_board">
+        <form id="registration_form" class="form-signin" method="post" th:action="@{/registration}" th:object="${user}">
+            <h2 class="form-signin-heading caption" th:text="#{reg.title}"></h2>
+
+            <!-- username -->
+            <div class="input-group">
+                <label for="inputUsername" class="sr-only">Username</label>
+
+                <div class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                <input th:required="required_field" autocomplete="off" type="text" id="inputUsername" class="form-control"
+                       th:placeholder="#{login.form.username}" th:field="*{login}"/>
+
+                <p class="turnLine" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></p>
+            </div>
+
+            <!-- password -->
+            <div class="input-group">
+                <label for="inputPassword" class="sr-only">Password</label>
+
+                <div class="input-group-addon"><i class="fa fa-unlock-alt pass_icon" aria-hidden="true"></i></div>
+                <input th:required="required_field" autocomplete="off" type="password" id="inputPassword" class="form-control"
+                       th:placeholder="#{login.form.password}" th:field="*{password}"/>
+
+                <p class="turnLine" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            </div>
+
+            <!-- confirm password -->
+            <div class="input-group">
+                <label for="inputConfirmPassword" class="sr-only">Confirm password</label>
+
+                <div class="input-group-addon"><i class="fa fa-unlock-alt pass_icon" aria-hidden="true"></i></div>
+                <input th:required="required_field" autocomplete="off" type="password" id="inputConfirmPassword" class="form-control"
+                       th:placeholder="#{register.form.confirm.password}" th:field="*{confirmPassword}"/>
+
+                <p class="turnLine" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+            </div>
+
+            <!-- email -->
+            <div class="input-group">
+                <label for="inputEmail" class="sr-only">Email</label>
+
+                <div class="input-group-addon"><i class="fa fa-envelope pass_icon" aria-hidden="true"></i></div>
+                <input th:required="required_field" autocomplete="off" type="email" id="inputEmail" class="form-control"
+                       th:placeholder="#{register.form.email}" th:field="*{email}"/>
+
+                <p class="turnLine" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            </div>
+
+            <button id="login_button" type="submit" th:text="#{register.form.button}"></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

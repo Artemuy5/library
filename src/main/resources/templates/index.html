@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Library</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="row" id="content">
+        <div class="col-md-8">
+            <th:block th:each="book: ${books}">
+                <div id="mapping_book">
+                    <div class="img_book">
+                        <img th:src="@{|/book/${book.id}/image|}" height="300" width="250"/>
+                    </div>
+
+                    <div class="about_book clearfix">
+                        <div class="file_book_download">
+                            <a th:href="@{|/download/${book.id}|}"><i class="fa fa-download" aria-hidden="true"></i></a>
+                        </div>
+                        <h1 class="wrap_book_name" th:text="${book.name}"></h1>
+
+                        <h3 class="wrap_author" th:text="${book.author}"></h3>
+
+                        <h4 class="wrap_description" th:text="${book.description}"></h4>
+
+                        <p th:text="|#{added.by} ${book.user.username}|"></p>
+
+                        <p th:text="${book.dateAdded}"></p>
+
+
+                        <div class="hidden" th:id="|comment-${book.id}|">
+                            <textarea id="comment_field" th:placeholder="#{leave.your.comment}" class="form-control"
+                                      rows="3"></textarea>
+
+                            <div class="buttons_comment">
+                                <button type="button" class="btn btn-success btn-sm button_add_comment"
+                                        th:onclick="|sendComment(${book.id})|"
+                                        th:text="#{add.reference.comment}">
+                                </button>
+                                <button type="button" class="btn btn-warning btn-sm but_cancel"
+                                        th:onclick="|cancelComment(${book.id})|" th:text="#{cancel.comment}">
+                                </button>
+                            </div>
+                        </div>
+
+                        <a class="leave_comment" href="#" th:onclick="|leaveComment(${book.id})|"
+                           th:id="|comment-link-${book.id}|" th:text="#{add.reference.comment}"></a>
+
+                        <a id="button_remove_book" class="btn btn-danger" th:href="@{|/book/${book.id}/remove|}"
+                           th:if="${#authentication.name == book.user.username}" th:text="#{delete.book}"></a>
+                    </div>
+
+
+                    <!-- Hidden block of comments -->
+                    <div class="block_comments">
+                        <th:block th:if="${!book.comments.isEmpty()}">
+                            <div class="toog_butt"></div>
+                            <div class="comments_window hidden">
+                                <th:block th:each="comment: ${book.comments}">
+                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                    <p th:text="${comment.text}"></p>
+
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                    <h6 th:text="|#{added.by} ${comment.user.username}|"></h6>
+                                </th:block>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+
+        <!-- Search form -->
+        <div class="col-md-4" id="search-form">
+            <th:block th:include="fragments/searchform :: searchform"/>
+        </div>
+    </div>
+
+
+    <!-- Pagination -->
+    <th:block th:include="fragments/pagination :: pagination"/>
+
+</div>
+</body>
+</html>

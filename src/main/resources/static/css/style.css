@@ -1,0 +1,186 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    padding-top: 70px;
+    font-family: 'Roboto Slab', serif;
+    background: url("../img/library_background.jpg") no-repeat fixed;
+    background-size: cover;
+}
+#tapestry {
+    position: fixed;
+    top: -70px;
+    width: 100%;
+    height: 150vh;
+    background: #721c24;
+    opacity: 0.1;
+}
+
+#search-form {
+    right: 40px;
+    padding: 35px 55px 35px;
+    min-height: 250px;
+    box-shadow: white 0px 0px 20px 1px;
+    background: #2B3E50;
+}
+#search_form_into_navbar {
+    position: relative;
+    margin-left: 280px;
+}
+
+.btn:hover {
+    background: #DF691A;
+    box-shadow: white 0px 0px 10px 2px;
+}
+
+#mapping_book {
+    box-shadow: white 0px 0px 20px 1px;
+    width: 90%;
+    min-width: 700px;
+    margin-bottom: 20px;
+    background: #2B3E50;
+}
+.img_book {
+    float: left;
+}
+.file_book_download {
+    position: absolute;
+    left: 200px;
+    top: 10px;
+
+}
+.file_book_download .fa {
+    color: white;
+}
+.file_book_download .fa:hover {
+    border-radius: 100px;
+    box-shadow: white 0 0 50px 10px;
+}
+.about_book {
+    position: relative;
+    left: 20px;
+}
+
+.wrap_book_name {
+    position: relative;
+    width: 95%;
+}
+.wrap_author {
+    position: relative;
+    width: 95%;
+}
+.wrap_description {
+    position: relative;
+    width: 95%;
+}
+.leave_comment {
+    position: absolute;
+    width: 220px;
+    left: 255px;
+    top: 240px;
+    border: 1px solid #4E5D6C;
+    padding: 7px 15px 9px;
+    color: white;
+    background: #4E5D6C;
+    transition: all 0.2s ease-in-out;
+}
+.leave_comment:hover {
+    text-decoration: none;
+    border: 1px solid #DF691A;
+    color: white;
+    background: #DF691A;
+    box-shadow: white 0px 0px 20px 1px;
+}
+#comment_field {
+    position: relative;
+    width: 100%;
+    left: -20px;
+}
+.buttons_comment {
+    position: relative;
+    left: -20px;
+}
+.button_add_comment {
+    width: 50%;
+    float: left;
+    background: #4E5D6C;
+}
+.button_add_comment:hover {
+    background: #DF691A;
+}
+.but_cancel {
+    width: 50%;
+    background: #4E5D6C;
+}
+.but_cancel:hover {
+    background: #DF691A;
+}
+.block_comments {
+    position: relative;
+}
+.comments_window {
+    background: #ffffff;
+    padding: 5px 10px 0 10px;
+    border-bottom: 1px solid #888;
+    overflow-y: scroll;
+    height: 150px;
+}
+.comments_window p {
+    color: #2B3E50;
+}
+.comments_window h6 {
+    color: #4E5D6C;
+}
+.comments_window .fa {
+    color: #DF691A;
+}
+
+#button_remove_book {
+    position: absolute;
+    width: 155px;
+    background: #4E5D6C;
+    left: 500px;
+    top: 240px;
+    transition: all 0.2s ease-in-out;
+}
+#button_remove_book:hover {
+    background: #DF691A;
+}
+.block_comments span {
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background: #ffffff;
+    box-shadow: white 0 0 10px 5px;
+}
+
+.pagination_wrapper {
+    width: 480px;
+    min-width: 480px;
+    margin: auto;
+    position: relative;
+}
+
+button {
+    outline: none;
+    line-height: 100%;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    min-height: 38px;
+}
+
+@media screen and (max-width: 1200px) {
+    #search-form {
+        left: 15px;
+    }
+    .navbar .container{
+        display: none;
+    }
+}

@@ -12,16 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,25 +33,24 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
-    private static final String DEFAULT_IMAGE = "https://orlandocreature.files.wordpress.com/2013/03/flying.jpg";
     private BookRepository bookRepository;
     private UserRepository userRepository;
+    private String defaultImage;
     private String imagesPath;
     private String filePath;
-    private RestTemplate restTemplate;
     private JdbcTemplate jdbcTemplate;
 
     public BookServiceImpl(BookRepository bookRepository,
                            UserRepository userRepository,
+                           @Value("${img.default}") String defaultImage,
                            @Value("${img.upload.path}") String imagesPath,
                            @Value("${book.upload.path}") String filePath,
-                           RestTemplate restTemplate,
                            JdbcTemplate jdbcTemplate) {
+        this.defaultImage = defaultImage;
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
         this.imagesPath = imagesPath;
         this.filePath = filePath;
-        this.restTemplate = restTemplate;
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -91,8 +85,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Integer id) throws IOException {
         bookRepository.delete(id);
+
+        Files.deleteIfExists(Paths.get(imagesPath, id.toString()));
+        Files.deleteIfExists(Paths.get(filePath, id.toString()));
     }
 
     @Override
@@ -100,11 +97,7 @@ public class BookServiceImpl implements BookService {
         if (imageExists(id)) {
             return Files.readAllBytes(Paths.get(imagesPath, id.toString()));
         } else {
-            ResponseEntity<byte[]> responseEntity = restTemplate.exchange(DEFAULT_IMAGE,
-                    HttpMethod.GET,
-                    new HttpEntity<Void>(new HttpHeaders()),
-                    byte[].class);
-            return responseEntity.getBody();
+            return Files.readAllBytes(Paths.get(defaultImage));
         }
     }
 

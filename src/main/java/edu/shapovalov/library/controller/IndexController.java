@@ -9,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * @author Artem Shapovalov
  * @version 0.1
@@ -26,11 +24,10 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String index(Model model, HttpSession session,
+    public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") int page,
                         @RequestParam(name="search", defaultValue = "") String search,
                         @RequestParam(name="sort", defaultValue = "dateAdded") String sort) {
-        //получаем все книги и кладем их в модель для доступа из шаблонизатора
         Page<Book> books = bookService.listBooks(page, search.trim(), sort);
         model.addAttribute("books", books.getContent());
         model.addAttribute("totalPages", books.getTotalPages());

@@ -16,7 +16,6 @@ import java.io.IOException;
  */
 
 @Controller
-//все запросы, которые начинаются на /book, идут сюда
 @RequestMapping("/book")
 public class BookController {
     private BookService bookService;
@@ -25,23 +24,20 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    //по GET запросу показываем форму добавления
     @GetMapping("/add")
     public String bookForm(Model model) {
         model.addAttribute("book", new BookDto());
         return "book";
     }
 
-    //по POST запросу обрабатываем форму и сохраняем
     @PostMapping("/add")
     public String addBook(@ModelAttribute("book") BookDto bookDto) throws IOException {
         bookService.addBook(bookDto);
         return "redirect:/";
     }
 
-    //удаляем book по ID
     @GetMapping("/{id}/remove")
-    public String remove(@PathVariable Integer id) {
+    public String remove(@PathVariable Integer id) throws IOException {
         bookService.remove(id);
         return "redirect:/";
     }

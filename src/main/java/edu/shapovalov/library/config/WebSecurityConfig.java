@@ -22,32 +22,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-    // конфигурируем защиту запросов
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                //разрешаем всем регистрироваться и получать статические ресурсы
                 .antMatchers("/login/**", "/registration", "/css/*", "/js/*", "/img/*", "/font-awesome/**")
                     .permitAll()
-                //все остальные запросы должны быть аторизированы
                     .anyRequest()
                     .authenticated()
                     .and()
-                //регистрируем страницу входа и даем всем доступ
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()
                     .and()
-                //регистрируем путь для выхода и даем всем доступ
                 .logout()
                     .permitAll()
-                //отключаем CSRF фильтр
                     .and()
                     .csrf()
                     .disable();
     }
 
-    // указываем, как получать пользователя
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);

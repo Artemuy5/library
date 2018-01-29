@@ -23,13 +23,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new RestTemplate();
     }
 
-    // выбираем стратегию хранения локали
     @Bean
     public LocaleResolver localeResolver() {
         return new SessionLocaleResolver();
     }
 
-    // создаем перехватчик запросов, который считывает параметр lang и меняет локаль
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -37,7 +35,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return localeChangeInterceptor;
     }
 
-    // регистрируем перехватчик в приложении
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);

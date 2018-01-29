@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 
 @Controller
-//все запросы, которые начинаются на /comment, идут сюда
 @RequestMapping("/comment")
 public class CommentController {
     private CommentService commentService;
@@ -26,11 +25,9 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    //путь /comment/add принимает только JSON
     @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    //всегда возвращаем статус OK
     @ResponseStatus(HttpStatus.OK)
-    public void add(/* форма приходит в теле POST запроса */ @RequestBody CommentDto commentDto) {
+    public void add(@RequestBody CommentDto commentDto) {
         commentService.addComment(commentDto);
     }
 }

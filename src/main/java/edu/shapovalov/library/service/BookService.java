@@ -19,7 +19,7 @@ public interface BookService {
 
     void addBook(BookDto bookDto) throws IOException;
 
-    void remove(Integer id);
+    void remove(Integer id) throws IOException;
 
     byte[] image(Integer id) throws IOException;
 

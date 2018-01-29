@@ -27,7 +27,6 @@ public class UserController {
         this.registrationValidator = registrationValidator;
     }
 
-    //регистрируем валидатор для формы регистрации
     @InitBinder
     public void addRegistrationValidator(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(registrationValidator);
@@ -44,10 +43,8 @@ public class UserController {
         return "registration";
     }
 
-    //валидируем форму и в случае ошибки опять показываем страницу с формой
     @PostMapping("/registration")
-    public String register(@ModelAttribute("user") @Valid RegistrationDto registrationDto,
-                           /* хранит результаты валидации */ BindingResult bindingResult) {
+    public String register(@ModelAttribute("user") @Valid RegistrationDto registrationDto, BindingResult bindingResult) {
         registrationValidator.validate(registrationDto, bindingResult);
 
         if (bindingResult.hasErrors()) {

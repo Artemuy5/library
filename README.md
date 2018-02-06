@@ -4,6 +4,7 @@ Exam project.
 This project include technology such as: Spring Boot, Spring Security, Hibernate, MySQL, JQuery, HTML, CSS, Thymeleaf, Lombok.
 
 Login: user
+
 Password: 123
 
 In order to run the project, you must set up a connection to the MySQL database. 
